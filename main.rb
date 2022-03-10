@@ -11,8 +11,16 @@ end
 
 # 1. Create a binary search tree from an array of random numbers
 
-puts 'Create a binary search tree from an array of random numbers'
+puts 'Create a binary search tree from an array of random numbers', ''
 
 tree = Tree.new(Array.new(15) { rand(1..100) })
+
+pretty_print(tree.root)
+
+# 4. Unbalance the tree by adding several numbers > 100
+
+puts '', 'Unbalance the tree', ''
+
+5.times { tree.insert(rand(101..200)) }
 
 pretty_print(tree.root)

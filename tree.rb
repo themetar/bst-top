@@ -23,6 +23,24 @@ class Tree
     @root = build_tree(array.uniq.sort)
   end
 
+  def insert(value)
+    node = Node.new(value)
+    current = @root
+
+    loop do
+      case node <=> current
+      when -1
+        current.left = node if current.left.nil?
+        current = current.left
+      when 0
+        return current
+      when 1
+        current.right = node if current.right.nil?
+        current = current.right
+      end
+    end
+  end
+
   private
 
   # Recursive implementation
