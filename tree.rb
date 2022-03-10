@@ -15,3 +15,22 @@ class Node
     self.data <=> other.data
   end
 end
+
+class Tree
+  attr_accessor :root
+
+  def initialize(array)
+    @root = build_tree(array.uniq.sort)
+  end
+
+  private
+
+  # Recursive implementation
+  def build_tree(array)
+    return nil if array == []
+    return Node.new(array.first) if array.length == 1
+
+    mid = array.length / 2
+    Node.new(array[mid], build_tree(array[0...mid]), build_tree(array[(mid+1)..]))
+  end
+end
