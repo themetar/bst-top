@@ -9,6 +9,10 @@ def pretty_print(node = @root, prefix = '', is_left = true)
 end
 ##
 
-tree = Tree.new((1..20).to_a.sample(10))
+# 1. Create a binary search tree from an array of random numbers
+
+puts 'Create a binary search tree from an array of random numbers'
+
+tree = Tree.new(Array.new(15) { rand(1..100) })
 
 pretty_print(tree.root)
