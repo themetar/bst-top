@@ -24,3 +24,13 @@ puts '', 'Unbalance the tree', ''
 5.times { tree.insert(rand(101..200)) }
 
 pretty_print(tree.root)
+
+# 4.1 Test delete
+
+puts '', 'Delete node', ''
+
+print 'Select value: '; val = gets.strip.to_i
+
+tree.delete(val)
+
+pretty_print(tree.root)

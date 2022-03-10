@@ -41,6 +41,52 @@ class Tree
     end
   end
 
+  # Deletes a node from the tree. Returns the deleted node
+  def delete(value, start_node = nil)
+    parent, node = nil, start_node || @root
+
+    loop do
+      return if node.nil? # quit if reached (and passed) a leaf node without finding the target
+
+      if node.data == value
+        # delete
+        case [node.left, node.right]
+        in [nil, nil] | [_, nil] | [nil, _] # zero children, only one (L) child, only one (R) child
+          child = node.left || node.right   # nil in zero children case 
+          # replace with child
+          if parent
+            parent.data < value ? parent.right = child : parent.left = child
+          else
+            @root = child
+          end
+        else # two children
+          # find next largest node
+          successor_parent, successor = node, node.right
+          loop do
+            break if successor.left.nil?
+            successor_parent, successor = successor, successor.left
+          end
+
+          successor = delete(successor.data, successor_parent)  # delete from its original place
+
+          # replace with successor
+          successor.left = node.left
+          successor.right = node.right
+          if parent
+            parent.data < value ? parent.right = successor : parent.left = successor
+          else
+            @root = successor
+          end
+        end
+
+        return node # return deleted node
+      else
+        parent = node
+        node = node.data < value ? node.right : node.left
+      end
+    end
+  end
+
   private
 
   # Recursive implementation
