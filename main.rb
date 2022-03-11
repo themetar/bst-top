@@ -25,6 +25,11 @@ puts '', 'Print level order', ''
 tree.level_order { |node| print node.data, ' ' }; puts
 puts tree.level_order.join(' ')
 
+puts '', 'Print in order', ''
+
+tree.inorder { |node| print node.data, ' ' }; puts
+puts tree.inorder.join(' ')
+
 # 4. Unbalance the tree by adding several numbers > 100
 
 puts '', 'Unbalance the tree', ''

@@ -116,6 +116,31 @@ class Tree
     out unless block_given? # return output array if a block wasn't provided
   end
 
+  def inorder
+    node, stack = @root, []
+
+    output = []
+
+    loop do
+      break if node.nil? && stack.empty?
+
+      unless node.nil?
+        # drill to the left
+        stack << node
+        node = node.left
+      else
+        # pop, yield and continue to the right
+        node = stack.pop
+        unless node.nil?
+          if block_given? then yield node else output << node.data end
+          node = node.right
+        end
+      end
+    end
+
+    output unless block_given?
+  end
+
   private
 
   # Recursive implementation
