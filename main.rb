@@ -11,9 +11,10 @@ end
 
 # 1. Create a binary search tree from an array of random numbers
 
+array = Array.new(15) { rand(1..100) }
 puts 'Create a binary search tree from an array of random numbers', ''
 
-tree = Tree.new(Array.new(15) { rand(1..100) })
+tree = Tree.new(array)
 
 pretty_print(tree.root)
 
@@ -25,12 +26,7 @@ puts '', 'Unbalance the tree', ''
 
 pretty_print(tree.root)
 
-# 4.1 Test delete
+# X.x Test find
 
-puts '', 'Delete node', ''
-
-print 'Select value: '; val = gets.strip.to_i
-
-tree.delete(val)
-
-pretty_print(tree.root)
+puts "Find #{q = array.sample}"
+p tree.find(q)

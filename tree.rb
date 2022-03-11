@@ -41,6 +41,16 @@ class Tree
     end
   end
 
+  def find(value)
+    node = @root
+    
+    until node.nil?
+      decide = value <=> node.data
+      return node if decide.zero? # found it!
+      node = decide == -1 ? node.left : node.right      
+    end
+  end
+
   # Deletes a node from the tree. Returns the deleted node
   def delete(value, start_node = nil)
     parent, node = nil, start_node || @root
