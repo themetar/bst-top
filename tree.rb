@@ -97,6 +97,25 @@ class Tree
     end
   end
 
+  def level_order
+    queue = [@root]
+
+    out = []
+
+    until queue.empty?
+      node = queue.shift
+      queue << node.left if node.left
+      queue << node.right if node.right
+      if block_given?
+        yield node
+      else
+        out << node.data
+      end
+    end
+
+    out unless block_given? # return output array if a block wasn't provided
+  end
+
   private
 
   # Recursive implementation

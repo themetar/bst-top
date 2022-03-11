@@ -18,6 +18,13 @@ tree = Tree.new(array)
 
 pretty_print(tree.root)
 
+# 3. Print out tree's elements 
+
+puts '', 'Print level order', ''
+
+tree.level_order { |node| print node.data, ' ' }; puts
+puts tree.level_order.join(' ')
+
 # 4. Unbalance the tree by adding several numbers > 100
 
 puts '', 'Unbalance the tree', ''
@@ -25,8 +32,3 @@ puts '', 'Unbalance the tree', ''
 5.times { tree.insert(rand(101..200)) }
 
 pretty_print(tree.root)
-
-# X.x Test find
-
-puts "Find #{q = array.sample}"
-p tree.find(q)
