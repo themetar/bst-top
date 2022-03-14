@@ -206,6 +206,27 @@ class Tree
     depth
   end
 
+  def balanced?
+    # Same as #height, but check height difference at each parent
+    heights = []
+
+    postorder do |node|
+      if node.left.nil? && node.right.nil?  # leaf node
+        heights << 0
+      else
+        # parent
+        right_subtree_height = node.right && heights.pop || 0 
+        left_subtree_height = node.left && heights.pop || 0
+        
+        return false if (left_subtree_height - right_subtree_height).abs > 1  # foud one unbalanced node, whole tree is unbalanced
+
+        heights << [left_subtree_height, right_subtree_height].max + 1
+      end
+    end
+
+    true
+  end
+
   private
 
   # Recursive implementation

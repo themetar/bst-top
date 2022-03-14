@@ -18,26 +18,26 @@ tree = Tree.new(array)
 
 pretty_print(tree.root)
 
+# 2. Confirm that the tree is balanced by calling #balanced?
+
+puts '', "Tree is#{tree.balanced? ? '' : ' NOT'} balanced.", ''
+
 # 3. Print out tree's elements 
 
 puts '', 'Print level order', ''
 
-tree.level_order { |node| print node.data, ' ' }; puts
 puts tree.level_order.join(' ')
 
 puts '', 'Print in order', ''
 
-tree.inorder { |node| print node.data, ' ' }; puts
 puts tree.inorder.join(' ')
 
 puts '', 'Print preorder', ''
 
-tree.preorder { |node| print node.data, ' ' }; puts
 puts tree.preorder.join(' ')
 
 puts '', 'Print postorder', ''
 
-tree.postorder { |node| print node.data, ' ' }; puts
 puts tree.postorder.join(' ')
 
 # 4. Unbalance the tree by adding several numbers > 100
@@ -48,9 +48,6 @@ puts '', 'Unbalance the tree', ''
 
 pretty_print(tree.root)
 
-# X. Test depth
+# 5. Confirm that the tree is unbalanced by calling #balanced?
 
-5.times do
-  val = array.sample
-  puts '', "Depth of #{val} is #{tree.depth(tree.find(val))}", ''
-end
+puts '', "Tree is #{tree.balanced? ? '' : 'NOT'} balanced.", ''
