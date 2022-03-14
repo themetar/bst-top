@@ -158,8 +158,8 @@ class Tree
     output unless block_given?
   end    
 
-  def postorder
-    node, command = @root, :visit
+  def postorder(start = nil)
+    node, command = start || @root, :visit
     stack = []
     output = []
 
@@ -179,6 +179,22 @@ class Tree
 
     output unless block_given?
   end
+
+  def height(start)
+    # Travese postorder; set parent nodes height as childrens' + 1 
+    heights = []
+
+    postorder(start) do |node|
+      if node.left.nil? && node.right.nil?  # leaf node
+        heights << 0
+      else
+        heights << [node.left && heights.pop || 0, node.right && heights.pop || 0].max + 1
+      end
+    end
+
+    heights[0]
+  end
+
 
   private
 
