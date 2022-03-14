@@ -141,6 +141,23 @@ class Tree
     output unless block_given?
   end
 
+  def preorder
+    node = @root
+    stack = []
+    output = []
+
+    loop do
+      break if node.nil? && stack.empty?
+      
+      if block_given? then yield node else output << node.data end
+    
+      stack << node.right if node.right
+      node = node.left || stack.pop
+    end
+
+    output unless block_given?
+  end    
+
   private
 
   # Recursive implementation
