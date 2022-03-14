@@ -195,6 +195,16 @@ class Tree
     heights[0]
   end
 
+  def depth(node)
+    # Same as #find but count levels
+    depth = 0
+    current = @root
+    until current == node || current.nil?
+      current = node > current ? current.right : current.left
+      depth += 1
+    end
+    depth
+  end
 
   private
 

@@ -47,3 +47,10 @@ puts '', 'Unbalance the tree', ''
 5.times { tree.insert(rand(101..200)) }
 
 pretty_print(tree.root)
+
+# X. Test depth
+
+5.times do
+  val = array.sample
+  puts '', "Depth of #{val} is #{tree.depth(tree.find(val))}", ''
+end
