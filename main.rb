@@ -35,6 +35,11 @@ puts '', 'Print preorder', ''
 tree.preorder { |node| print node.data, ' ' }; puts
 puts tree.preorder.join(' ')
 
+puts '', 'Print postorder', ''
+
+tree.postorder { |node| print node.data, ' ' }; puts
+puts tree.postorder.join(' ')
+
 # 4. Unbalance the tree by adding several numbers > 100
 
 puts '', 'Unbalance the tree', ''

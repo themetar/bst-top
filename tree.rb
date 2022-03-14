@@ -158,6 +158,28 @@ class Tree
     output unless block_given?
   end    
 
+  def postorder
+    node, command = @root, :visit
+    stack = []
+    output = []
+
+    loop do
+      break if node.nil? && stack.empty?
+
+      case command
+      when :visit
+        stack << [node, :print]
+        stack << [node.right, :visit] if node.right
+        node, command = node.left && [node.left, :visit] || stack.pop
+      when :print
+        if block_given? then yield node else output << node.data end
+        node, command = stack.pop
+      end
+    end
+
+    output unless block_given?
+  end
+
   private
 
   # Recursive implementation
