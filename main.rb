@@ -9,6 +9,18 @@ def pretty_print(node = @root, prefix = '', is_left = true)
 end
 ##
 
+def print_elements(tree)
+  puts '', 'Print elements', ''
+
+  puts '', "level order: #{tree.level_order.join(' ')}", ''
+
+  puts '', "preorder:    #{tree.preorder.join(' ')}", ''
+
+  puts '', "postorder:   #{tree.postorder.join(' ')}", ''
+
+  puts '', "in order:    #{tree.inorder.join(' ')}", ''
+end  
+
 # 1. Create a binary search tree from an array of random numbers
 
 array = Array.new(15) { rand(1..100) }
@@ -24,15 +36,7 @@ puts '', "Tree is#{tree.balanced? ? '' : ' NOT'} balanced.", ''
 
 # 3. Print out tree's elements 
 
-puts '', 'Print elements', ''
-
-puts '', "level order: #{tree.level_order.join(' ')}", ''
-
-puts '', "preorder:    #{tree.preorder.join(' ')}", ''
-
-puts '', "postorder:   #{tree.postorder.join(' ')}", ''
-
-puts '', "in order:    #{tree.inorder.join(' ')}", ''
+print_elements(tree)
 
 # 4. Unbalance the tree by adding several numbers > 100
 
@@ -60,12 +64,4 @@ pretty_print(tree.root)
 
 # 8. Print out all elements in level, pre, post, and in order
 
-puts '', 'Print elements', ''
-
-puts '', "level order: #{tree.level_order.join(' ')}", ''
-
-puts '', "preorder:    #{tree.preorder.join(' ')}", ''
-
-puts '', "postorder:   #{tree.postorder.join(' ')}", ''
-
-puts '', "in order:    #{tree.inorder.join(' ')}", ''
+print_elements(tree)
