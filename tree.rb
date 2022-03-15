@@ -41,16 +41,6 @@ class Tree
     end
   end
 
-  def find(value)
-    node = @root
-    
-    until node.nil?
-      decide = value <=> node.data
-      return node if decide.zero? # found it!
-      node = decide == -1 ? node.left : node.right      
-    end
-  end
-
   # Searches for a value, emiting nodes along the path to block
   # Returns the value's node if found
   def path(value, start_node = nil)
@@ -62,6 +52,10 @@ class Tree
 
       node = value < node.data ? node.left : node.right
     end
+  end
+
+  def find(value)
+    path(value)
   end
 
   # Deletes a node from the tree. Returns the deleted node
