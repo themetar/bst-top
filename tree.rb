@@ -227,6 +227,10 @@ class Tree
     true
   end
 
+  def rebalance
+    build_tree(inorder)
+  end
+
   private
 
   # Recursive implementation

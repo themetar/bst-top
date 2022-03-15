@@ -24,21 +24,15 @@ puts '', "Tree is#{tree.balanced? ? '' : ' NOT'} balanced.", ''
 
 # 3. Print out tree's elements 
 
-puts '', 'Print level order', ''
+puts '', 'Print elements', ''
 
-puts tree.level_order.join(' ')
+puts '', "level order: #{tree.level_order.join(' ')}", ''
 
-puts '', 'Print in order', ''
+puts '', "preorder:    #{tree.preorder.join(' ')}", ''
 
-puts tree.inorder.join(' ')
+puts '', "postorder:   #{tree.postorder.join(' ')}", ''
 
-puts '', 'Print preorder', ''
-
-puts tree.preorder.join(' ')
-
-puts '', 'Print postorder', ''
-
-puts tree.postorder.join(' ')
+puts '', "in order:    #{tree.inorder.join(' ')}", ''
 
 # 4. Unbalance the tree by adding several numbers > 100
 
@@ -51,3 +45,27 @@ pretty_print(tree.root)
 # 5. Confirm that the tree is unbalanced by calling #balanced?
 
 puts '', "Tree is #{tree.balanced? ? '' : 'NOT'} balanced.", ''
+
+# 6. Balance the tree by calling #rebalance
+
+puts '', '(Re)balance the tree', ''
+
+tree.rebalance
+
+# 7. Confirm that the tree is balanced by calling #balanced?
+
+puts '', "Tree is #{tree.balanced? ? '' : 'NOT'} balanced.", ''
+
+pretty_print(tree.root)
+
+# 8. Print out all elements in level, pre, post, and in order
+
+puts '', 'Print elements', ''
+
+puts '', "level order: #{tree.level_order.join(' ')}", ''
+
+puts '', "preorder:    #{tree.preorder.join(' ')}", ''
+
+puts '', "postorder:   #{tree.postorder.join(' ')}", ''
+
+puts '', "in order:    #{tree.inorder.join(' ')}", ''
