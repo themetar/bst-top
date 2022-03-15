@@ -199,13 +199,9 @@ class Tree
   end
 
   def depth(node)
-    # Same as #find but count levels
+    # Count levels in path
     depth = 0
-    current = @root
-    until current == node || current.nil?
-      current = node > current ? current.right : current.left
-      depth += 1
-    end
+    path(node.data) { depth += 1 }
     depth
   end
 
