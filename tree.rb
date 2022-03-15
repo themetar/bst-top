@@ -51,6 +51,19 @@ class Tree
     end
   end
 
+  # Searches for a value, emiting nodes along the path to block
+  # Returns the value's node if found
+  def path(value, start_node = nil)
+    node = start_node || @root
+    until node.nil?
+      return node if node.data == value
+
+      yield node if block_given?
+
+      node = value < node.data ? node.left : node.right
+    end
+  end
+
   # Deletes a node from the tree. Returns the deleted node
   def delete(value, start_node = nil)
     parent, node = nil, start_node || @root
