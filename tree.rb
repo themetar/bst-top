@@ -66,48 +66,44 @@ class Tree
 
   # Deletes a node from the tree. Returns the deleted node
   def delete(value, start_node = nil)
-    parent, node = nil, start_node || @root
+    parent = nil
 
-    loop do
-      return if node.nil? # quit if reached (and passed) a leaf node without finding the target
+    node = path(value, start_node) { |path_node| parent = path_node } # find target node and it's parent
 
-      if node.data == value
-        # delete
-        case [node.left, node.right]
-        in [nil, nil] | [_, nil] | [nil, _] # zero children, only one (L) child, only one (R) child
-          child = node.left || node.right   # nil in zero children case 
-          # replace with child
-          if parent
-            parent.data < value ? parent.right = child : parent.left = child
-          else
-            @root = child
-          end
-        else # two children
-          # find next largest node
-          successor_parent, successor = node, node.right
-          loop do
-            break if successor.left.nil?
-            successor_parent, successor = successor, successor.left
-          end
+    return if node.nil? # quit if no node is found
 
-          successor = delete(successor.data, successor_parent)  # delete from its original place
-
-          # replace with successor
-          successor.left = node.left
-          successor.right = node.right
-          if parent
-            parent.data < value ? parent.right = successor : parent.left = successor
-          else
-            @root = successor
-          end
-        end
-
-        return node # return deleted node
+    # Proc to be called when a node's place is to be taken by another
+    replace_with = Proc.new do |node, parent, replacement|
+      if parent
+        parent < node ? parent.right = replacement : parent.left = replacement
       else
-        parent = node
-        node = node.data < value ? node.right : node.left
+        @root = replacement
       end
     end
+
+    # delete
+    case [node.left, node.right]
+    in [nil, nil] | [_, nil] | [nil, _] # zero children, only one (L) child, only one (R) child
+      # replace with child
+      replace_with.call(node, parent, node.left || node.right)  # child is nil in zero children case
+    else # two children
+      # find next largest node
+      successor_parent, successor = node, node.right
+      loop do
+        break if successor.left.nil?
+        successor_parent, successor = successor, successor.left
+      end
+
+      # replace successor with its children, i.e. delete successor from its original place
+      replace_with.call(successor, successor_parent, successor.left || successor.right)
+
+      # replace node with successor
+      successor.left = node.left    # copy links
+      successor.right = node.right  #
+      replace_with.call(node, parent, successor)
+    end
+
+    return node # return deleted node
   end
 
   def level_order
